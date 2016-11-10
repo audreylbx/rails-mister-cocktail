@@ -16,8 +16,17 @@
 #Ingredient.create(name: "sugar")
 #Ingredient.create(name: "gin")
 
-ingredients_attributes = [{name: "lemon"}, {name: "ice"}, {name: "mint leaves"},{name: "tomatoes"},
-  {name: "rhum"}, {name: "vodka"}, {name: "grenadine"}, {name: "sugar"}, {name: "gin"}]
+Cocktail.destroy_all
+Cocktail.create(name: "Mojito")
+Cocktail.create(name: "Bloody Marry")
+Cocktail.create(name: "Sex on the beach")
+Cocktail.create(name: "Cuba Libre")
+Cocktail.create(name: "White Russian")
+Cocktail.create(name: "Long Island Ice Tea")
 
 
-ingredients_attributes.each { |params| Ingredient.create!(params) }
+Ingredient.destroy_all
+url = "http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+ingredients = JSON.parse(open(url).read)["drinks"]
+ingredients.map! { |ingredient| { name: ingredient["strIngredient1"] } }
+Ingredient.create(ingredients)

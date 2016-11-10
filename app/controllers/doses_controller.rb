@@ -5,11 +5,17 @@ class DosesController < ApplicationController
     @dose = Dose.new(dose_params)
     @dose.cocktail = @cocktail
     @dose.save
+    if @dose.save
+      redirect_to @cocktail
+    else
+      render 'cocktails/show'
+    end
   end
 
   def destroy
     @dose = Dose.find(params[:id])
     @dose.destroy
+    redirect_to @dose.cocktail
   end
 
   private
