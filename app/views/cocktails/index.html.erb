@@ -1,3 +1,9 @@
 <div class="container">
-<h1>Mes cocktails 🍹</h1>
+  <h1>My cocktails 🍹</h1>
+  <ul class="list-unstyled">
+    <% @cocktails.each do |cocktail| %>
+      <li><%= cocktail.name  %></li>
+      <%= link_to "Recipe", cocktail_path(cocktail)  %>
+    <% end %>
+  </ul>
 </div>
