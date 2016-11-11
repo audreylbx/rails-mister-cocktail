@@ -1,28 +1,28 @@
 <div class="container">
   <h1>My cocktails 🍹</h1>
-  <div class="row">
-    <% @cocktails.each do |cocktail| %>
-      <% if cocktail.photos.any? %>
+    <div class="row">
+      <% @cocktails.each do |cocktail| %>
+        <% if cocktail.photos.any? %>
+          <div class="col-xs-12 col-sm-4">
+            <%= link_to cocktail_path(cocktail), { :class=>"card-link" } do  %>
+              <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path cocktail.photos.first.path, height: 300, width: 400, crop: :fill %>')">
+                <div class="card-description">
+                  <p><%= cocktail.name  %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      <% else %>
         <div class="col-xs-12 col-sm-4">
           <%= link_to cocktail_path(cocktail), { :class=>"card-link" } do  %>
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path cocktail.photos.first.path, height: 300, width: 400, crop: :fill %>')">
+            <div class="card" style="background-color: #dddbd7">
               <div class="card-description">
                 <p><%= cocktail.name  %></p>
               </div>
             </div>
           <% end %>
         </div>
-      </div>
-    <% else %>
-      <div class="col-xs-12 col-sm-4">
-        <%= link_to cocktail_path(cocktail), { :class=>"card-link" } do  %>
-          <div class="card" style="background-color: #dddbd7">
-            <div class="card-description">
-              <p><%= cocktail.name  %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
