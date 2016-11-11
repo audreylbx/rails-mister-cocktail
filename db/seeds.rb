@@ -18,7 +18,6 @@
 
 Cocktail.destroy_all
 Cocktail.create(name: "Mojito")
-Cocktail.create(name: "Bloody Marry")
 Cocktail.create(name: "Sex on the beach")
 Cocktail.create(name: "Cuba Libre")
 Cocktail.create(name: "White Russian")
