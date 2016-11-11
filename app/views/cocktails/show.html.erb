@@ -1,13 +1,30 @@
 <div class="container">
+
   <h1>Recipe time 🍹</h1>
+
   <h2>To make the best <%= @cocktail.name %>, follow these steps:</h2>
-  <ol>
-    <% @cocktail.doses.each do |dose| %>
-      <li><%= dose.description %> of <%= dose.ingredient.name %> | <%= link_to "Delete", cocktail_dose_path(@cocktail, dose), method: :delete, data: {confirm: "Are you sure?"} %></li>
-    <% end %>
-  </ol>
+  <% if @cocktail.doses.any? %>
+    <ol>
+      <% @cocktail.doses.each do |dose| %>
+        <li><%= dose.description %> of <%= dose.ingredient.name %> | <%= link_to "Delete", cocktail_dose_path(@cocktail, dose), method: :delete, data: {confirm: "Are you sure?"} %></li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p>There is no ingredient yet !</p>
+  <% end %>
+
   <div class="form">
     <p>Any ingredient missing?</p>
     <%= render 'doses/form_dose' %>
   </div>
+
+  <div class="picture-list">
+    <p>This is how it should look like</p>
+    <% if @cocktail.photos? %>
+      <% @cocktail.photos.each do |photo| %>
+        <%= cl_image_tag photo.path, width: 200, height: 300, crop: :fill %>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
